@@ -96,11 +96,11 @@ namespace GravityTurn
             return false;
         }
         public static bool IsSepratron(this Part p)
-        {
-            return p.ActivatesEvenIfDisconnected
-                && p.IsEngine()
-                && p.IsDecoupledInStage(p.inverseStage)
-                && p.isControlSource == Vessel.ControlLevel.NONE;
+        {      
+            ConfigNode partConfig = p.partInfo.partConfig;
+            string tags = partConfig.GetValue("tags");
+            return tags.Contains("separat")
+                && tags.Contains("thruster")
         }
         public static bool IsEngine(this Part p)
         {
@@ -208,3 +208,4 @@ namespace GravityTurn
 
     }
 }
+
